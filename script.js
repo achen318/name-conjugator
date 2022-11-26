@@ -24,6 +24,42 @@ const indicativoPresente = [
   ['an', 'en', 'en']
 ];
 
+const indicativoPreterito = [
+  ['é', 'í', 'í'],
+  ['amos', 'imos', 'imos'],
+  ['aste', 'iste', 'iste'],
+  ['asteis', 'isteis', 'isteis'],
+  ['ó', 'ió', 'ió'],
+  ['aron', 'ieron', 'ieron']
+];
+
+const indicativoImperfecto = [
+  ['aba', 'ía', 'ía'],
+  ['ábamos', 'íamos', 'íamos'],
+  ['abas', 'ías', 'ías'],
+  ['abais', 'íais', 'íais'],
+  ['aba', 'ía', 'ía'],
+  ['aban', 'ían', 'ían']
+];
+
+const indicativoFuturo = [
+  ['aré', 'eré', 'iré'],
+  ['aremos', 'eremos', 'iremos'],
+  ['arás', 'erás', 'irás'],
+  ['aréis', 'eréis', 'iréis'],
+  ['ará', 'erá', 'irá'],
+  ['arán', 'erán', 'irán']
+];
+
+const subjunctivoPresente = [
+  ['e', 'a', 'a'],
+  ['emos', 'amos', 'amos'],
+  ['es', 'as', 'as'],
+  ['éis', 'áis', 'áis'],
+  ['e', 'a', 'a'],
+  ['en', 'an', 'an']
+];
+
 function conjugate() {
   const phrase = document.getElementById('phrase').value.toLowerCase();
   const words = phrase.split(' ');
