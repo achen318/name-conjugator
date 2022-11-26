@@ -1,4 +1,14 @@
-// yo, nosotros, tu, vosotros, el, ellos
+/**
+ * ----- ORDER OF CONJUGATIONS -----
+ * 0 - yo
+ * 1 - nosotros/nosotras
+ * 2 - tú
+ * 3 - vosotros/vosotras
+ * 4 - él/ella/usted
+ * 5 - ellos/ellas/ustedes
+ * ---------------------------------
+ */
+
 const pronouns = document.getElementsByTagName('td');
 
 const verbEndings = ['ar', 'er', 'ir'];
@@ -15,14 +25,35 @@ const indicativoPresente = [
 ];
 
 function conjugate() {
-  const word = document.getElementById('word').value.toLowerCase();
+  const phrase = document.getElementById('phrase').value.toLowerCase();
+  const words = phrase.split(' ');
 
-  const stem = getStem(word);
-  const endingIndex = getEndingIndex(word);
+  // Accumulate the conjugated phrase
+  const conjugations = ['', '', '', '', '', ''];
 
-  if (endingIndex === -1) return;
+  // Loop through each word in the phrase
+  for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
+    const word = words[wordIndex];
 
-  for (let i = 0; i < pronouns.length; ++i) {
-    pronouns[i].innerHTML = stem + indicativoPresente[i][endingIndex];
+    const stem = getStem(word);
+    const endingIndex = getEndingIndex(word);
+
+    // Loop through each pronoun
+    for (let pronounIndex = 0; pronounIndex < pronouns.length; pronounIndex++) {
+      conjugations[pronounIndex] +=
+        endingIndex === -1
+          ? // If the word is not a verb, add it to the conjugation
+            word
+          : // Otherwise, add the conjugated verb
+            stem + indicativoPresente[pronounIndex][endingIndex];
+
+      // Add a space if it's not the last word
+      if (wordIndex < pronouns.length - 1) conjugations[pronounIndex] += ' ';
+    }
+  }
+
+  // Update the conjugations in the table
+  for (let i = 0; i < conjugations.length; i++) {
+    pronouns[i].innerHTML = conjugations[i];
   }
 }
