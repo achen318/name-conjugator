@@ -17,7 +17,7 @@
       <div>
         <label>
           el tiempo:
-          <select onchange="conjugate()">
+          <select id="tense-selector" onchange="conjugate()">
             <optgroup label="indicativo">
               <option value="0">presente</option>
               <option value="1">pretérito</option>
@@ -30,14 +30,28 @@
             </optgroup>
           </select>
         </label>
+
+        <br /><br />
+
+        <label>
+          <input
+            type="checkbox"
+            id="vosotros-checkbox"
+            onchange="conjugate()"
+            checked
+          />
+          vosotros/as enjoyer?
+        </label>
       </div>
 
       <div>
         <table>
           <tr>
-            <th class="table-title" colspan="4">
-              infinitivo =
-              <input type="text" id="phrase" oninput="conjugate()" />
+            <th colspan="4">
+              <label class="table-title">
+                infinitivo =
+                <input type="text" id="phrase-input" oninput="conjugate()" />
+              </label>
             </th>
           </tr>
 

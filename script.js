@@ -9,8 +9,13 @@
  * ---------------------------------
  */
 
+// Change this when adding images to the public/images folder
+const NUMBER_OF_IMAGES = 4;
+
 const pronouns = document.getElementsByClassName('conjugation');
-const tenseSelector = document.getElementsByTagName('select')[0];
+const tenseSelector = document.getElementById('tense-selector');
+const vosotrosCheckbox = document.getElementById('vosotros-checkbox');
+const phraseInput = document.getElementById('phrase-input');
 
 const verbEndings = ['ar', 'er', 'ir'];
 const getStem = (word) => word.slice(0, -2);
@@ -61,29 +66,37 @@ const subjunctivoPresente = [
   ['en', 'an', 'an']
 ];
 
-function conjugate() {
-  const phrase = document.getElementById('phrase').value.toLowerCase();
-  const words = phrase.split(' ');
-
-  let conjugations;
-
+function getConjugations() {
   // Get the conjugations of the selected tense
   switch (tenseSelector.value) {
     case '0':
-      conjugations = indicativoPresente;
-      break;
+      return indicativoPresente;
     case '1':
-      conjugations = indicativoPreterito;
-      break;
+      return indicativoPreterito;
     case '2':
-      conjugations = indicativoImperfecto;
-      break;
+      return indicativoImperfecto;
     case '3':
-      conjugations = indicativoFuturo;
-      break;
+      return indicativoFuturo;
     case '4':
-      conjugations = subjunctivoPresente;
+      return subjunctivoPresente;
   }
+}
+
+function replaceVosotros() {
+  const vosotrosCell = pronouns[3];
+  const fileNumber = Math.floor(Math.random() * NUMBER_OF_IMAGES);
+
+  vosotrosCell.innerHTML = `<img src="public/images/${fileNumber}.png" class="goofy-img"/>`;
+  vosotrosCell.style.padding = '0';
+}
+
+function conjugate() {
+  const phrase = phraseInput.value.toLowerCase();
+  const words = phrase.split(' ');
+
+  const useVosotros = vosotrosCheckbox.checked;
+
+  const conjugations = getConjugations();
 
   // Accumulate the conjugated phrase
   const conjugatedPhrases = ['', '', '', '', '', ''];
@@ -114,4 +127,7 @@ function conjugate() {
   for (let i = 0; i < conjugatedPhrases.length; i++) {
     pronouns[i].innerHTML = conjugatedPhrases[i];
   }
+
+  // Replace vosotros/as with a goofy image if checkbox is unchecked
+  if (!useVosotros) replaceVosotros();
 }
