@@ -12,10 +12,23 @@
 // Change this when adding images to the public/images folder
 const NUMBER_OF_IMAGES = 4;
 
+// --------------------------------------------------
 const pronouns = document.getElementsByClassName('conjugation');
+
 const tenseSelector = document.getElementById('tense-selector');
 const vosotrosCheckbox = document.getElementById('vosotros-checkbox');
+
+const conjugationTable = document.getElementById('conjugation-table');
 const phraseInput = document.getElementById('phrase-input');
+
+const modal = document.getElementById('modal');
+const screenshot = document.getElementById('screenshot');
+const downloadLink = document.getElementById('download-link');
+
+const toggleModal = () => modal.classList.toggle('show-modal');
+window.addEventListener('click', (e) => {
+  if (e.target === modal) toggleModal();
+});
 
 const verbEndings = ['ar', 'er', 'ir'];
 const getStem = (word) => word.slice(0, -2);
@@ -130,4 +143,19 @@ function conjugate() {
 
   // Replace vosotros/as with a goofy image if checkbox is unchecked
   if (!useVosotros) replaceVosotros();
+}
+
+function saveAsImage() {
+  // ! value of phraseInput is rendered weirdly in the screenshot
+
+  // Show the modal
+  toggleModal();
+
+  // Save an image and display it in the modal (with download link)
+  html2canvas(conjugationTable).then((canvas) => {
+    const uri = canvas.toDataURL();
+
+    screenshot.src = uri;
+    downloadLink.href = uri;
+  });
 }
