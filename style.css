@@ -12,6 +12,20 @@ main {
   transform: translate(-50%, -50%);
 }
 
+div {
+  margin: 3rem;
+}
+
+label,
+select {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+select {
+  border: 1px solid;
+}
+
 table {
   border-collapse: collapse;
   table-layout: fixed;
@@ -19,7 +33,7 @@ table {
 
 th,
 td {
-  border: 1px solid black;
+  border: 1px solid;
   width: 10rem;
   padding: 1rem;
 }
@@ -28,12 +42,16 @@ td {
   font-size: 2rem;
 }
 
-input {
+input[type='text'] {
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid;
 
   font-size: 2rem;
   text-align: center;
+}
+
+input[type='radio'] {
+  text-align: right;
 }
 
 input:focus {

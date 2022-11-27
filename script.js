@@ -9,7 +9,8 @@
  * ---------------------------------
  */
 
-const pronouns = document.getElementsByTagName('td');
+const pronouns = document.getElementsByClassName('conjugation');
+const tenseSelector = document.getElementsByTagName('select')[0];
 
 const verbEndings = ['ar', 'er', 'ir'];
 const getStem = (word) => word.slice(0, -2);
@@ -64,8 +65,28 @@ function conjugate() {
   const phrase = document.getElementById('phrase').value.toLowerCase();
   const words = phrase.split(' ');
 
+  let conjugations;
+
+  // Get the conjugations of the selected tense
+  switch (tenseSelector.value) {
+    case '0':
+      conjugations = indicativoPresente;
+      break;
+    case '1':
+      conjugations = indicativoPreterito;
+      break;
+    case '2':
+      conjugations = indicativoImperfecto;
+      break;
+    case '3':
+      conjugations = indicativoFuturo;
+      break;
+    case '4':
+      conjugations = subjunctivoPresente;
+  }
+
   // Accumulate the conjugated phrase
-  const conjugations = ['', '', '', '', '', ''];
+  const conjugatedPhrases = ['', '', '', '', '', ''];
 
   // Loop through each word in the phrase
   for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
@@ -76,20 +97,21 @@ function conjugate() {
 
     // Loop through each pronoun
     for (let pronounIndex = 0; pronounIndex < pronouns.length; pronounIndex++) {
-      conjugations[pronounIndex] +=
+      conjugatedPhrases[pronounIndex] +=
         endingIndex === -1
           ? // If the word is not a verb, add it to the conjugation
             word
           : // Otherwise, add the conjugated verb
-            stem + indicativoPresente[pronounIndex][endingIndex];
+            stem + conjugations[pronounIndex][endingIndex];
 
       // Add a space if it's not the last word
-      if (wordIndex < pronouns.length - 1) conjugations[pronounIndex] += ' ';
+      if (wordIndex < pronouns.length - 1)
+        conjugatedPhrases[pronounIndex] += ' ';
     }
   }
 
   // Update the conjugations in the table
-  for (let i = 0; i < conjugations.length; i++) {
-    pronouns[i].innerHTML = conjugations[i];
+  for (let i = 0; i < conjugatedPhrases.length; i++) {
+    pronouns[i].innerHTML = conjugatedPhrases[i];
   }
 }

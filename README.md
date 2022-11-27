@@ -1,6 +1,16 @@
-# phrase-conjugator
+# name-conjugator
 
-Conjugates a phrase based on regular Spanish conjugation rules.
+Conjugates a name (phrase) based on regular Spanish conjugation rules.
+
+## Inspirations
+
+- [the ssenator](https://github.com/ShauryaSen) (#1 conjugator on Duolingo)
+- [the beng](https://github.com/BenG49) (infinitivo: bengar/ber)
+- [Spanish Verb Tenses Chart](https://www.reddit.com/r/learnspanish/comments/kvuo4r/spanish_verb_tenses/) (why are there so many tenses???)
+- [mis profesores de español](https://youtu.be/iFUAWMMdE7c) (la cucaracha)
+- [Google Translate](https://translate.google.com/) (pls dont ban me)
+- [SpanishDict](https://www.spanishdict.com/) (real translator)
+- you ♥
 
 ---
 
